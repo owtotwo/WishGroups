@@ -1,4 +1,7 @@
-#!flask/bin/python
+#!../flask/bin/python
+import sys
+sys.path.append('../')
+
 from app import db, models
 from sqlalchemy import text
 

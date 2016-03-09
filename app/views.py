@@ -22,7 +22,7 @@ def login():
 			print 'remember_me on'
 		else:
 			print 'remember_me off'
-		if find_user(username).password == password:
+		if find_user_by_name(username).password == password:
 			print "Success to Login In!"
 			return redirect(url_for('index'))
 		else:
@@ -40,7 +40,7 @@ def register():
 		password_1 = request.form.get('password_1')
 		password_2 = request.form.get('password_2')
 		
-		if find_user(username):
+		if find_user_by_name(username):
 			return "This Username has already been used.\n"
 		else:
 			add_user(username, password_1)
