@@ -5,7 +5,7 @@ sys.path.append("../")    # add root folder"WishGroup" to the system path
 
 import imp
 from migrate.versioning import api
-from app import db
+from app import db, models
 from config import SQLALCHEMY_DATABASE_URI
 from config import SQLALCHEMY_MIGRATE_REPO
 

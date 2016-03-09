@@ -7,5 +7,3 @@ app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', True)
 db = SQLAlchemy(app)
 
 from app import views
-import sys
-sys.path.append('../')
