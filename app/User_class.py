@@ -1,26 +1,45 @@
 from app import db
-from sqlalchemy import text
+from flask.ext import login
 
-import Member_class, Group_class
-
-class User(db.Model):
-
+class User(db.Model, login.UserMixin):
+	__tablename__ = 'user'
 	id = db.Column(db.Integer, primary_key = True)
 	username = db.Column(db.String(128), index = True, unique = True)
 	password = db.Column(db.String(20))
-	members = db.relationship('Member', backref = 'user', lazy = 'dynamic')
 
 # ------------------------------------------------------------------------------
-
 	def __init__(self, username, password):
 		self.username = username
 		self.password = password
 
-	def get_id(self):
-		return unicode(self.id)
-
 	def __repr__(self):
 		return '<User %r>' % (self.username)
+
+
+
+# ==============================================================================
+
+def find_user_by_id(user_id):
+	return User.query.get(user_id)
+
+def find_user_by_name(user_name):
+	return User.query.filter(User.username == user_name).first()
+
+def add_user(username, password):
+	db.session.add(User(username, password))
+	db.session.commit()
+
+def check_user(username, password):
+	result = find_user_by_name(username)
+	return result and result.password == password
+
+'''
+from sqlalchemy import text
+from Member_class import Member
+from Group_class import Group
+
+	def get_id(self):
+		return unicode(self.id)
 
 	def join_group_by_id(self, group_id):
 		Member.add_member(self.id, group_id)
@@ -65,3 +84,5 @@ class User(db.Model):
 		else:
 			print 'No this User'
 			return False
+
+'''

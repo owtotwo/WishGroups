@@ -6,4 +6,8 @@ app.config.from_object('config')
 app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', True)
 db = SQLAlchemy(app)
 
-from app import views
+from flask.ext import login
+login_manager = login.LoginManager()
+login_manager.setup_app(app)
+
+from app import view

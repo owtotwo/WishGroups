@@ -3,24 +3,27 @@ import sys; sys.path.append('../')
 from config import NUM_OF_MEMBER_INIT_STARS
 from app import db
 from Wish_class import Wish
+from User_class import User
 
 class Member(db.Model):
+	__tablename__ = 'member'
 	id = db.Column(db.Integer, primary_key = True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	group_id = db.Column(db.Integer, db.ForeignKey('Group.id'))
+	user = db.relationship('User', backref = 'members', lazy = 'dynamic')
 	stars = db.Column(db.Integer)
-	wishes = db.relationship('Wish', backref = 'wisher', lazy = 'dynamic')
-	tasks = db.relationship('Wish', backref = 'implementer', lazy = 'dynamic')
+	wishes = db.relationship('Wish', backref = 'wisher', lazy = 'dynamic', foreign_keys = 'Wish.wisher_id')
+	tasks = db.relationship('Wish', backref = 'implementer', lazy = 'dynamic', foreign_keys = 'Wish.implementer_id')
 
 # ------------------------------------------------------------------------------
-
-	def __init__(self, user_id, group_id):
+'''
+	def __init__(self, user_id, wishgroup_id):
 		self.user_id = user_id
-		self.group_id = group_id
+		self.wishgroup_id = wishgroup_id
 		self.stars = NUM_OF_MEMBER_INIT_STARS
 
 	def __repr__(self):
 		return '<Wish %r>' % (self.body)
+
 
 	def add_wish(self, body, stars):
 		Wish.add_wish(body, stars, self.id, )
@@ -50,3 +53,4 @@ class Member(db.Model):
 			return True
 		else:
 			return False
+'''
