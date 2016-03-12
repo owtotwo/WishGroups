@@ -8,6 +8,7 @@ class Member(db.Model):
 	__tablename__ = 'member'
 
 	id = db.Column(db.Integer, primary_key = True)
+	inner_id = db.Column(db.Integer, unique = True)
 	stars = db.Column(db.Integer)
 
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

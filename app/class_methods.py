@@ -1,6 +1,17 @@
 from models import *
 from app import db
 
+
+
+# ========================== Wish ================================
+
+def find_wish_by_id(wish_id):
+	return Wish.query.get(wish_id)
+
+def add_wish(body, wisher_id):
+	pass
+
+
 # ========================= Member ===============================
 
 def find_member_by_id(member_id):
@@ -28,16 +39,6 @@ def add_user(username, password):
 def check_user(username, password):
 	result = find_user_by_name(username)
 	return result and result.password == password
-
-
-
-# ========================== Wish ================================
-
-def find_wish_by_id(wish_id):
-	return Wish.query.get(wish_id)
-
-def add_wish(body, wisher_id):
-	pass
 
 
 # ======================== Wishgroup =============================
