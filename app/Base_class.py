@@ -1,4 +1,5 @@
 # The base class for Wish Group Element.
+from datetime import datetime
 
 class Base():
 	id = db.Column(db.Integer, primary_key = True)
