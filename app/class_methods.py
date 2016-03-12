@@ -4,8 +4,14 @@ from app import db
 # ========================= Member ===============================
 
 def find_member_by_id(member_id):
+	return Member.query.get(member_id)
+
+def add_member():
 	pass
 
+def get_admin_by_id(wishgroup_id):
+	return Wishgroup.query.get(wishgroup_id)\
+		.members.filter(Member.inner_id == 0).first()
 
 # ========================== User ================================
 
@@ -27,17 +33,23 @@ def check_user(username, password):
 
 # ========================== Wish ================================
 
-	def find_wish_by_id(wish_id):
-		return Wish.query.get(wish_id)
+def find_wish_by_id(wish_id):
+	return Wish.query.get(wish_id)
 
-	def add_wish(body, wisher_id):
-		pass
+def add_wish(body, wisher_id):
+	pass
 
 
 # ======================== Wishgroup =============================
 
+def all_wishgroups():
+	return Wishgroup.query.all()
+
 def find_wishgroup_by_id(wishgroup_id):
-	pass
+	return Wishgroup.query.get(wishgroup_id)
 
 def find_wishgroup_by_name(wishgroup_name):
+	return Wishgroup.query.filter(Wishgroup.name == wishgroup_name).first()
+
+def add_wishgroup():
 	pass

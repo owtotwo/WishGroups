@@ -85,4 +85,5 @@ def join_group():
 def group_list():
 	return render_template('group_list.html',\
 		current_user = login.current_user,\
+		all_wishgroups = all_wishgroups,\
 		user_wishgroups = [i.wishgroup for i in login.current_user.members])

@@ -1,0 +1,22 @@
+<!-- group_list.html -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2> Your Wish Groups </h2>
+{% if user_wishgroups %}
+	{% for wishgroup in user_wishgroups %}
+		<p>{{ wishgroup.id }} | {{ wishgroup.name }}</p>
+	{% endfor %}
+{% else %}
+	<p>-- YOU HAVE NOT JOINED ANY GROUPS --</p>
+{% endif %}
+
+<br/><hr><br/>
+
+<h2> All Wish Groups </h2>
+	{% for wishgroup in all_wishgroups() %}
+		<p>{{ wishgroup.id }} | {{ wishgroup.name }}</p>
+	{% endfor %}
+
+{% endblock %}
