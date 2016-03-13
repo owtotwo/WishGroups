@@ -1,0 +1,21 @@
+<!-- join_group.html -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> Join Groups </h1>
+<p>Which wish group do you want to join?</p>
+<hr>
+<h3>Groups List : </h3>
+<form action="" name="choose wishgroup" method="get">
+{% for wishgroup in all_wishgroups() %}
+	{% if wishgroup not in user_wishgroups %}
+		<input type="radio" name="wishgroup" value="{{ wishgroup.id }} | {{ wishgroup.name }}"/><br/>
+	{% endif %}
+{% endfor %}
+<br/>
+<hr>
+<input type="submit" value="join in"/>
+</form>
+
+{% endblock %}

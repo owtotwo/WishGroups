@@ -1,7 +1,7 @@
 from models import *
 from app import db
 
-
+ADMIN_INNER_ID = 0
 
 # ========================== Wish ================================
 
@@ -9,20 +9,28 @@ def find_wish_by_id(wish_id):
 	return Wish.query.get(wish_id)
 
 def add_wish(body, wisher_id):
-	pass
-
+	w = Wish(body, wisher_id)
+	mem = Member.query.get(wisher_id)
+	w.wishgroup_id = mem.wishgroup_id
+	w.implementer_id = get_admin_by_id(mem.wishgroup_id) # set to admin
+	db.session.add(w)
+	db.session.commit()
 
 # ========================= Member ===============================
 
 def find_member_by_id(member_id):
 	return Member.query.get(member_id)
 
-def add_member():
-	pass
+def add_member(user_id, wishgroup_id):
+	wg = Wishgroup.query.get(wishgroup_id)
+	next_inner_id = wg.members.order_by(Member.inner_id).all()[-1].id + 1
+	mem = Member(user_id, wishgroup_id, next_inner_id)
+	db.session.add(mem)
+	db.session.commit()
 
 def get_admin_by_id(wishgroup_id):
 	return Wishgroup.query.get(wishgroup_id)\
-		.members.filter(Member.inner_id == 0).first()
+		.members.filter(Member.inner_id == ADMIN_INNER_ID).first()
 
 # ========================== User ================================
 
@@ -52,5 +60,12 @@ def find_wishgroup_by_id(wishgroup_id):
 def find_wishgroup_by_name(wishgroup_name):
 	return Wishgroup.query.filter(Wishgroup.name == wishgroup_name).first()
 
-def add_wishgroup():
-	pass
+def add_wishgroup(user_id, wishgroup_name):
+	# create a admin with inner id of zero when add a new wishgroup
+	wg = Wishgroup(wishgroup_name)
+	db.session.add(wg)
+	wishgroup_id = find_wishgroup_by_name(wishgroup_name).id
+	inner_id = ADMIN_INNER_ID
+	admin = Member(user_id, wishgroup_id, inner_id)
+	db.session.add(admin)
+	db.session.commit()

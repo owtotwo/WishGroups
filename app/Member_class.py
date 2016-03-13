@@ -19,10 +19,11 @@ class Member(db.Model):
 
 # ------------------------------------------------------------------------------
 
-	def __init__(self, user_id, wishgroup_id):
+	def __init__(self, user_id, wishgroup_id, inner_id):
 		self.stars = NUM_OF_MEMBER_INIT_STARS
 		self.user_id = user_id
 		self.wishgroup_id = wishgroup_id
+		self.inner_id = inner_id
 
 	def __repr__(self):
 		return '<Member %r>' % (self.id)

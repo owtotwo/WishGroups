@@ -78,7 +78,11 @@ def user_info():
 @app.route('/join_group')
 @login.login_required
 def join_group():
-	pass
+	return render_template('join_group.html',\
+		current_user = login.current_user,\
+		all_wishgroups = all_wishgroups,\
+		user_wishgroups = [i.wishgroup for i in login.current_user.members])
+
 
 @app.route('/group_list')
 @login.login_required
