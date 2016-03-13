@@ -23,7 +23,7 @@ def find_member_by_id(member_id):
 
 def add_member(user_id, wishgroup_id):
 	wg = Wishgroup.query.get(wishgroup_id)
-	next_inner_id = wg.members.order_by(Member.inner_id).all()[-1].id + 1
+	next_inner_id = wg.members.order_by(Member.inner_id).all()[-1].inner_id + 1
 	mem = Member(user_id, wishgroup_id, next_inner_id)
 	db.session.add(mem)
 	db.session.commit()

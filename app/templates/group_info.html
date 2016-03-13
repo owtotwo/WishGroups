@@ -6,6 +6,8 @@
 	<p> Name     : {{ wishgroup.name }} </p>
 	<p> Num of Member : {{ num_of_members }} </p>
 	<br/>
+	<p><a href="/group_list"> &lt- back to groups list</a></p>
+	<br/>
 	<h3> List of Members : </h3>
 	{% for member in wishgroup_members %}
 		<p>{{ member.inner_id }} | {{ member.user.username }}</p>
