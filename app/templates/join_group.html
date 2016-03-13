@@ -7,15 +7,15 @@
 <p>Which wish group do you want to join?</p>
 <hr>
 <h3>Groups List : </h3>
-<form action="" name="choose wishgroup" method="get">
+<form action="" method="get">
 {% for wishgroup in all_wishgroups() %}
 	{% if wishgroup not in user_wishgroups %}
-		<input type="radio" name="wishgroup" value="{{ wishgroup.id }} | {{ wishgroup.name }}"/><br/>
+		<p><input type="radio" name="wishgroup_id" value="{{ wishgroup.id }}"/>{{ wishgroup.id }} | {{ wishgroup.name }}<p/>
 	{% endif %}
 {% endfor %}
 <br/>
 <hr>
-<input type="submit" value="join in"/>
+<div>wish group id : <input type="submit" value="join in"/></div><br/>
 </form>
 
 {% endblock %}

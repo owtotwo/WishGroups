@@ -12,7 +12,7 @@ def add_wish(body, wisher_id):
 	w = Wish(body, wisher_id)
 	mem = Member.query.get(wisher_id)
 	w.wishgroup_id = mem.wishgroup_id
-	w.implementer_id = get_admin_by_id(mem.wishgroup_id) # set to admin
+	w.implementer_id = get_admin_by_id(mem.wishgroup_id).id # set to admin
 	db.session.add(w)
 	db.session.commit()
 
@@ -31,6 +31,10 @@ def add_member(user_id, wishgroup_id):
 def get_admin_by_id(wishgroup_id):
 	return Wishgroup.query.get(wishgroup_id)\
 		.members.filter(Member.inner_id == ADMIN_INNER_ID).first()
+
+def user_is_in_wishgroup(user_id, wishgroup_id):
+	u = User.query.get(user_id)
+	return wishgroup_id in [i.wishgroup_id for i in u.members]
 
 # ========================== User ================================
 

@@ -75,9 +75,16 @@ def user_info():
 		current_user = login.current_user)
 
 
-@app.route('/join_group')
+@app.route('/join_group', methods = ['GET', 'POST'])
 @login.login_required
 def join_group():
+	if request.args.get('wishgroup_id'):
+		wishgroup_id = int(request.args.get('wishgroup_id'))
+		if not user_is_in_wishgroup(login.current_user.id, wishgroup_id):
+			add_member(login.current_user.id, int(wishgroup_id))
+			return redirect(url_for('group_list'))
+		else:
+			flash('You have been in this group!')
 	return render_template('join_group.html',\
 		current_user = login.current_user,\
 		all_wishgroups = all_wishgroups,\

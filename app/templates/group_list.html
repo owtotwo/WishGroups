@@ -17,7 +17,7 @@
 <h2> All Wish Groups </h2>
 {% for wishgroup in all_wishgroups() %}
 	{% if wishgroup in user_wishgroups %}
-		<font color="green">{{ wishgroup.id }} | {{ wishgroup.name }}</font>
+		<p><font color="green">{{ wishgroup.id }} | {{ wishgroup.name }}</font></p>
 	{% else %}
 		<p>{{ wishgroup.id }} | {{ wishgroup.name }}</p>
 	{% endif %}
