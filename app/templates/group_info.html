@@ -1,0 +1,13 @@
+<!-- group_info.html -->
+{% extends "base.html" %}
+{% block content %}
+	<h1>Group Information</h1>
+	<p> Id       : {{ wishgroup.id }} </p>
+	<p> Name     : {{ wishgroup.name }} </p>
+	<p> Num of Member : {{ num_of_members }} </p>
+	<br/>
+	<h3> List of Members : </h3>
+	{% for member in wishgroup_members %}
+		<p>{{ member.inner_id }} | {{ member.user.username }}</p>
+	{% endfor %}
+{% endblock %}

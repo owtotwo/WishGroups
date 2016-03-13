@@ -56,7 +56,7 @@ def check_user(username, password):
 # ======================== Wishgroup =============================
 
 def all_wishgroups():
-	return Wishgroup.query.all()
+	return Wishgroup.query.order_by(Wishgroup.id).all()
 
 def find_wishgroup_by_id(wishgroup_id):
 	return Wishgroup.query.get(wishgroup_id)
@@ -73,3 +73,7 @@ def add_wishgroup(user_id, wishgroup_name):
 	admin = Member(user_id, wishgroup_id, inner_id)
 	db.session.add(admin)
 	db.session.commit()
+
+def get_members_from_wishgroup_by_id(wishgroup_id):
+	result = Member.query.filter(Member.wishgroup_id == wishgroup_id).all()
+	return sorted(result, key = (lambda x: x.inner_id))

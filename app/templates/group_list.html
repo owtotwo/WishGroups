@@ -6,7 +6,7 @@
 <h2> Your Wish Groups </h2>
 {% if user_wishgroups %}
 	{% for wishgroup in user_wishgroups %}
-		<p>{{ wishgroup.id }} | {{ wishgroup.name }}</p>
+		<p><a href="/group_info/{{ wishgroup.id }}">{{ wishgroup.id }} | {{ wishgroup.name }}</a></p>
 	{% endfor %}
 {% else %}
 	<p>-- YOU HAVE NOT JOINED ANY GROUPS --</p>

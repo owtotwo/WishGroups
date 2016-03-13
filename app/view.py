@@ -98,3 +98,17 @@ def group_list():
 		current_user = login.current_user,\
 		all_wishgroups = all_wishgroups,\
 		user_wishgroups = [i.wishgroup for i in login.current_user.members])
+
+
+@app.route('/group_info/<int:wishgroup_id>')
+@login.login_required
+def group_info(wishgroup_id):
+	wg = find_wishgroup_by_id(wishgroup_id)
+	if not wg:
+		return redirect(url_for('group_list'))
+	wishgroup_members = get_members_from_wishgroup_by_id(wishgroup_id)
+	return render_template('group_info.html',\
+		current_user = login.current_user,\
+		wishgroup = wg,\
+		num_of_members = len(wishgroup_members),\
+		wishgroup_members = wishgroup_members)
