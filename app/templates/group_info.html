@@ -1,29 +1,54 @@
 <!-- group_info.html -->
 {% extends "base.html" %}
 {% block content %}
+	<script type="text/javascript">
+	function make_wish() {
+		var but = document.getElementById("my_button");
+		var par = but.parentElement;
+		par.removeChild(but);
+
+		var tmp = document.getElementById("make_wish");
+		tmp.innerHTML =
+			'<br/>\n' + 
+			'<form action="" method="post" name="make_wish">\n' + 
+				'<p><b>Your wish : </b></p>\n' +
+				'<textarea rows="6" cols="60" maxlength="140" name="newwish"></textarea>\n' +
+				'<p><font style="italic">PS: The number of letters can not be greater than 140.</font></p>\n' +
+				// '<p hidden><input type="text" name="wishgroup_id" value="{{ wishgroup.id }}"/></p>\n' +
+				'<input type="submit" value="Make!"/>\n' +
+			'</form>\n';
+	}
+	</script>
+
 	<h1>Group Information</h1>
 	<p> Id       : {{ wishgroup.id }} </p>
 	<p> Name     : {{ wishgroup.name }} </p>
 	<p> Num of Member : {{ num_of_members }} </p>
 	<br/><hr>
+
 	<h2>Wishes</h2>
+	<button onclick="make_wish()" id="my_button">MAKE WISH</button>
+	<div id="make_wish"></div><br/>
 	{% for wish in member_wishes %}
-	<p>Wisher : {{ wish.wisher }} </p>
-	<p>Implementer : {{ wish.implementer }} </p>
-	<p>Body : {{ wish.body }} </p>
+	<p>Wisher : <font color="green">{{ wish.wisher.user.username }}</font> </p>
+	<p>Implementer : <font color="green">{{ wish.implementer.user.username }}</font> </p>
+	<p>Body : <font color="green">{{ wish.body }}</font> </p>
 	<br/>
 	{% endfor %}
 	<br/><hr>
+
 	<h2>Tasks</h2>
 	{% for task in member_tasks %}
-	<p>Wisher : {{ task.wisher }} </p>
-	<p>Implementer : {{ task.implementer }} </p>
-	<p>Body : {{ task.body }} </p>
+	<p>Wisher : <font color="green">{{ task.wisher.user.username }}</font> </p>
+	<p>Implementer : <font color="green">{{ task.implementer.user.username }}</font> </p>
+	<p>Body : <font color="green">{{ task.body }}</font> </p>
 	<br/>
 	{% endfor %}
 	<br/><hr>
+
 	<p><a href="/group_list"> &lt- back to groups list</a></p>
 	<hr><br/>
+
 	<h3> List of Members : </h3>
 	{% for member in wishgroup_members %}
 		<p>{{ member.inner_id }} | {{ member.user.username }}</p>

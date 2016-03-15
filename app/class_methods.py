@@ -16,6 +16,7 @@ def add_wish(body, wisher_id):
 	db.session.add(w)
 	db.session.commit()
 
+
 # ========================= Member ===============================
 
 def find_member_by_id(member_id):
@@ -39,6 +40,11 @@ def user_is_in_wishgroup(user_id, wishgroup_id):
 def get_member_by_user_and_wishgroup(user_id, wishgroup_id):
 	return Member.query.filter(Member.user_id == user_id,\
 		Member.wishgroup_id == wishgroup_id).first()
+
+def has_made_wish(member_id):
+	mem = find_member_by_id(member_id)
+	# TODO()
+	return False
 
 # ========================== User ================================
 

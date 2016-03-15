@@ -100,14 +100,24 @@ def group_list():
 		user_wishgroups = [i.wishgroup for i in login.current_user.members])
 
 
-@app.route('/group_info/<int:wishgroup_id>')
+@app.route('/group_info/<int:wishgroup_id>', methods = ["GET", "POST"])
 @login.login_required
 def group_info(wishgroup_id):
 	wg = find_wishgroup_by_id(wishgroup_id)
 	mem = get_member_by_user_and_wishgroup(login.current_user.id, wishgroup_id)
+	wishgroup_members = get_members_from_wishgroup_by_id(wishgroup_id)
+
+	if request.method == "POST":
+		newwish = request.form.get("newwish")
+		if has_made_wish(mem.id):
+			flash("Sorry, You have made a wish today...")
+		else:
+			add_wish(newwish, mem.id)
+			flash("Success to make a wish!")
+
 	if not wg:
 		return redirect(url_for('group_list'))
-	wishgroup_members = get_members_from_wishgroup_by_id(wishgroup_id)
+	
 	return render_template('group_info.html',\
 		current_user = login.current_user,\
 		wishgroup = wg,\
@@ -122,8 +132,8 @@ def group_info(wishgroup_id):
 def make_wish():
 	#mem = get_member_by_user_and_wishgroup(login.current_user.id, wishgroup_id)
 	if request.method == "POST":
-
+		pass
 	return render_template("make_wish.html",\
 		current_user = login.current_user,\
-		has_made_wish = )
+		has_made_wish = lambda x:x)
 
