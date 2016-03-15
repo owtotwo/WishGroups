@@ -5,9 +5,25 @@
 	<p> Id       : {{ wishgroup.id }} </p>
 	<p> Name     : {{ wishgroup.name }} </p>
 	<p> Num of Member : {{ num_of_members }} </p>
+	<br/><hr>
+	<h2>Wishes</h2>
+	{% for wish in member_wishes %}
+	<p>Wisher : {{ wish.wisher }} </p>
+	<p>Implementer : {{ wish.implementer }} </p>
+	<p>Body : {{ wish.body }} </p>
 	<br/>
+	{% endfor %}
+	<br/><hr>
+	<h2>Tasks</h2>
+	{% for task in member_tasks %}
+	<p>Wisher : {{ task.wisher }} </p>
+	<p>Implementer : {{ task.implementer }} </p>
+	<p>Body : {{ task.body }} </p>
+	<br/>
+	{% endfor %}
+	<br/><hr>
 	<p><a href="/group_list"> &lt- back to groups list</a></p>
-	<br/>
+	<hr><br/>
 	<h3> List of Members : </h3>
 	{% for member in wishgroup_members %}
 		<p>{{ member.inner_id }} | {{ member.user.username }}</p>

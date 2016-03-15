@@ -104,6 +104,7 @@ def group_list():
 @login.login_required
 def group_info(wishgroup_id):
 	wg = find_wishgroup_by_id(wishgroup_id)
+	mem = get_member_by_user_and_wishgroup(login.current_user.id, wishgroup_id)
 	if not wg:
 		return redirect(url_for('group_list'))
 	wishgroup_members = get_members_from_wishgroup_by_id(wishgroup_id)
@@ -111,4 +112,18 @@ def group_info(wishgroup_id):
 		current_user = login.current_user,\
 		wishgroup = wg,\
 		num_of_members = len(wishgroup_members),\
-		wishgroup_members = wishgroup_members)
+		wishgroup_members = wishgroup_members,\
+		member_wishes = mem.wishes,\
+		member_tasks = mem.tasks)
+
+
+@app.route('/make_wish')
+@login.login_required
+def make_wish():
+	#mem = get_member_by_user_and_wishgroup(login.current_user.id, wishgroup_id)
+	if request.method == "POST":
+
+	return render_template("make_wish.html",\
+		current_user = login.current_user,\
+		has_made_wish = )
+

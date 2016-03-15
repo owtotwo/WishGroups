@@ -36,6 +36,10 @@ def user_is_in_wishgroup(user_id, wishgroup_id):
 	u = User.query.get(user_id)
 	return wishgroup_id in [i.wishgroup_id for i in u.members]
 
+def get_member_by_user_and_wishgroup(user_id, wishgroup_id):
+	return Member.query.filter(Member.user_id == user_id,\
+		Member.wishgroup_id == wishgroup_id).first()
+
 # ========================== User ================================
 
 def find_user_by_id(user_id):
