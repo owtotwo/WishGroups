@@ -1,35 +1,89 @@
-<!-- base.html -->
-<html>
-	<head>
-		{% if title %}
-		<title>{{ title }} - WishGroup</title>
-		{% else %}
-		<title>WishGroup</title>
-		{% endif %}
-	</head>
-	<body>
-		<!-- top bar -->
-		<div>WishGroup: <a href="/index">Home</a></div><br/>
-		{% if current_user.is_authenticated %}
-		<div>Username : {{ current_user.username }}</div>
-		<div>you can <a href="/logout">logout</a></div>
-		{% else %}
-		<div>Guest, maybe you should <a href="/register">register</a> or <a href="/login">login</a> at first!</div>
-		{% endif %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- message flash -->
-		{% with messages = get_flashed_messages() %}
+    {% if title %}
+    <title>{{ title }} - WishGroup</title>
+    {% else %}
+    <title>WishGroup</title>
+    {% endif %}
+
+    <!-- Bootstrap -->
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet">
+    <script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <style>
+      body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+      }
+    </style>
+  </head>
+
+
+  <body background="static/dribbble.png">
+
+    <div class="navbar navbar-default navbar-fixed-top"><div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/index" style="font-size: 200%">WishGroup</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/index" style="font-size:150%">Index</a></li>
+        <li><a href="/list" style="font-size:150%">Book List</a></li>
+        <li><a href="/help" style="font-size:150%">Help</a></li>
+      </ul>
+      
+      {% if current_user.is_authenticated %}
+      <div class="btn-group navbar-right">
+      <button type="button" class="btn btn-default dropdown-toggle navbar-btn"  data-toggle="dropdown">
+	      {{ current_user.username }} <span class="caret"></span>          
+      </button>
+      <ul class="dropdown-menu" role="menu">
+          <li><a href="/group_list">Group List</a></li>
+          <li role="presentation"><a href="/info">Information</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+      
+      {% else %}
+      <div class="btn-group navbar-right">
+        <button type="button" class="btn btn-default navbar-btn" onclick="location='/login'"
+        style="font-width:120%">Sign in</button>
+        <button type="button" class="btn btn-default navbar-btn" onclick="location='/register'"
+        style="font-width:120%">Sign up</button>
+      </div>
+      {% endif %}
+    </div></div>
+
+    <!-- message flash -->
+    {% with messages = get_flashed_messages() %}
 		{% if messages %}
-		<ul>
-		{% for message in messages %}
-			<li>{{ message }}</li>
-		{% endfor %}
-		</ul>
-		{% endif %}
-		{% endwith %}
-		<hr>
+    <div class="container">
+      
+          <div class="alert alert-warning alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <ul>
+            {% for message in messages %}
+              <li><strong>{{ message }}</strong></li>
+            {% endfor %}
+            </ul>
+          </div>
+        
+    </div>
+    {% endif %}
+    {% endwith %}
 
-		<!-- main content -->
-		{% block content %}{% endblock %}
-	</body>
+    <div class="container">
+    {% block content %}
+    {% endblock %}
+    </div>
+    <div class="container" >
+    <hr>
+    <footer align="center"><p style="font-size:150%">© SYSU MSTC 2016. All rights reserved</p></footer>
+    </div>
+  </body>
 </html>

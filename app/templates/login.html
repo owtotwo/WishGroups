@@ -3,7 +3,29 @@
 
 {% block content %}
 
-<h1> Login </h1>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-2 column">
+    </div>
+		<div class="col-md-8 column">
+      <h1> Login </h1>
+      {% from "_form_macro.html" import render_field %}
+			<form class="form-horizontal" role="form" method = "post" action = "/login">
+				{{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+             <p><input type = "submit" value = "Sign in" class="btn btn-default"></p>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-2 column">
+		</div>
+	</div>
+</div>
+
+<!--
 {% from "_form_macro.html" import render_field %}
 <form method = "post" action = "/login">
 	<dl>
@@ -13,5 +35,5 @@
 	<p><input type = "submit" value = "Login"/></p>
 </form>
 <hr>
-
+-->
 {% endblock %}
