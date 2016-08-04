@@ -1,6 +1,6 @@
-./save.sh
-./clean.sh
-./run
+save.sh
+clean.sh
+run
 *__pycache__/
 venv/
-./.gitignore
+.gitignore
