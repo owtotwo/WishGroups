@@ -1,6 +1,6 @@
 from app import db
-from Member_class import Member
-from Wish_class import Wish
+from app.Member_class import Member
+from app.Wish_class import Wish
 
 class Wishgroup(db.Model):
 

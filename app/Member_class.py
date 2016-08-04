@@ -2,7 +2,7 @@ import sys; sys.path.append('../')
 
 from config import NUM_OF_MEMBER_INIT_STARS
 from app import db
-from Wish_class import Wish
+from app.Wish_class import Wish
 
 class Member(db.Model):
 	__tablename__ = 'member'

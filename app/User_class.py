@@ -1,6 +1,6 @@
 from app import db
-from flask.ext import login
-from Member_class import Member
+import flask_login as login
+from app.Member_class import Member
 
 class User(db.Model, login.UserMixin):
 	__tablename__ = 'user'

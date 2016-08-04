@@ -1,12 +1,12 @@
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config')
 app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', True)
 db = SQLAlchemy(app)
 
-from flask.ext import login
+import flask_login as login
 login_manager = login.LoginManager()
 login_manager.setup_app(app)
 

@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
-from flask.ext import login
+import flask_login as login
 from app import app, login_manager
-from class_methods import *
+from app.class_methods import *
 from .forms import RegistrationForm, LoginForm
 
 @login_manager.user_loader
@@ -10,7 +10,7 @@ def load_user(user_id):
 
 @app.errorhandler(404)
 def not_found(error):
-	print "Error %s: Can\'t not found this page." % (error)
+	print ("Error 404: %s" % (error))
 	return render_template('404.html')
 
 # ----------------------------------------------------------
@@ -30,8 +30,8 @@ def log_in():
 		if check_user(form.username.data, form.password.data):
 			login.login_user(find_user_by_name(form.username.data))
 			flash('Success to Login.')
-			print 'Success to Login.'
-			print 'current username is ' + login.current_user.username
+			print('Success to Login.')
+			print('current username is ' + login.current_user.username)
 			return redirect(url_for('index'))
 
 		else:
