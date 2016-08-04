@@ -3,6 +3,29 @@
 
 {% block content %}
 
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-offset-2 col-md-8 column">
+      <h1 align="center"><strong> Register </strong></h1>
+      <hr>
+      {% from "_form_macro.html" import render_field %}
+			<form class="form-horizontal" role="form" method = "post" action = "/register">
+        {{ render_field(form.username, class="form-control") }}
+        {{ render_field(form.password, class="form-control") }}
+        {{ render_field(form.confirm, class="form-control") }}
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+             <p><input type = "submit" value = "Sign up" class="btn btn-default"></p>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-2 column">
+		</div>
+	</div>
+</div>
+
+<!--
 <h1> Register </h1>
 {% from "_form_macro.html" import render_field %}
 <form method=post action="/register">
@@ -14,5 +37,6 @@
   <p><input type=submit value=Register>
 </form>
 <hr>
+-->
 
 {% endblock%}

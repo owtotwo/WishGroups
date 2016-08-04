@@ -82,6 +82,7 @@ def join_group():
 		wishgroup_id = int(request.args.get('wishgroup_id'))
 		if not user_is_in_wishgroup(login.current_user.id, wishgroup_id):
 			add_member(login.current_user.id, int(wishgroup_id))
+			flash("Joined %s (group %d) successfully!" % (find_wishgroup_by_id(wishgroup_id).name, wishgroup_id))
 			return redirect(url_for('group_info', wishgroup_id = wishgroup_id))
 		else:
 			flash('You have been in this group!')

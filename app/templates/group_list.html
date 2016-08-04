@@ -3,24 +3,39 @@
 
 {% block content %}
 
-<h2> Your Wish Groups </h2>
-{% if user_wishgroups %}
-	{% for wishgroup in user_wishgroups %}
-		<p><a href="/group_info/{{ wishgroup.id }}">{{ wishgroup.id }} | {{ wishgroup.name }}</a></p>
-	{% endfor %}
-{% else %}
-	<p>-- YOU HAVE NOT JOINED ANY GROUPS --</p>
-{% endif %}
+<div class="container">
+  <div class="row">
+    <div class="column col-md-offset-1 col-md-10">
+      <h2> All Wish Groups </h2>
+      <table class="table table-bordered well">
+        <thead>
+          <th>No</th>
+          <th>Group Name</th>
+          <th>Joined</th>
+          <th>Detials</th>
+        </thead>
+        <tbody>
+          {% for wishgroup in all_wishgroups() %}
+          <tr>
+            <td>{{ wishgroup.id }}</td>
+            <td>{{ wishgroup.name }}</td>
+            {% if wishgroup in user_wishgroups %}
+            <td><span class="glyphicon glyphicon-ok" style="color:#C0FF3E"></span></td>
+            <td><a href="/group_info/{{ wishgroup.id }}">
+              <span class="glyphicon glyphicon-option-horizontal"></span>
+            </a></td>
+            {% else %}
+            <td><a href="/join_group?wishgroup_id={{ wishgroup.id }}">
+              <span class="glyphicon glyphicon-plus" style="color:#FFA500"></span>
+            </a></td>
+            <td></td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<br/><hr><br/>
-
-<h2> All Wish Groups </h2>
-{% for wishgroup in all_wishgroups() %}
-	{% if wishgroup in user_wishgroups %}
-		<p><font color="green">{{ wishgroup.id }} | {{ wishgroup.name }}</font></p>
-	{% else %}
-		<p>{{ wishgroup.id }} | {{ wishgroup.name }}</p>
-	{% endif %}
-{% endfor %}
-<p><a href="/join_group"> -> I want to join a group  </a></p>
 {% endblock %}

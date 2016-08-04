@@ -5,17 +5,16 @@
 
 <div class="container">
 	<div class="row clearfix">
-		<div class="col-md-2 column">
-    </div>
-		<div class="col-md-8 column">
-      <h1> Login </h1>
+		<div class="col-md-offset-2 col-md-7 column">
+      <h1 align="center"><strong> Login </strong></h1>
+      <hr>
       {% from "_form_macro.html" import render_field %}
 			<form class="form-horizontal" role="form" method = "post" action = "/login">
-				{{ render_field(form.username) }}
-        {{ render_field(form.password) }}
+        {{ render_field(form.username, class="form-control") }}
+        {{ render_field(form.password, class="form-control") }}
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-             <p><input type = "submit" value = "Sign in" class="btn btn-default"></p>
+					<div class="col-sm-offset-2 col-sm-8">
+             <p align="center"><input type = "submit" value = "Sign in" class="btn btn-lg btn-primary"></p>
 					</div>
 				</div>
 			</form>

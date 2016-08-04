@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <div class="jumbotron">
+  <div class="jumbotron well">
     <h1>Wish Groups in MSTC</h1>
     {% if current_user.is_authenticated %}
     <h1> Hello {{ current_user.username }}, Welcome to Wish Group ! </h1>
     <h2>You can do : </h2>
-    <p>			<div><a href="/info">Check my information</div></p>
-    <p>			<div><a href="/group_list">Check my wish groups list</div></p>
-    <p>			<div><a href="/make_wish">Make a wish</div></p>
+    <p>			<div><a href="/info">Check my information</a></div></p>
+    <p>			<div><a href="/group_list">Check my wish groups list</a></div></p>
+    <p>			<div><a href="/make_wish">Make a wish</a></div></p>
     {% else %}
     <h3> You are a Guest, please 
     <a class="btn btn-lg btn-primary" href="/register">Register »</a>
@@ -16,6 +16,6 @@
     </h3>
   </div>
 	{% endif %}
-  
+
 {% endblock %}
 

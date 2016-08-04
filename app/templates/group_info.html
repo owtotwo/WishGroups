@@ -20,37 +20,73 @@
 	}
 	</script>
 
-	<h1>Group Information</h1>
-	<p> Id       : {{ wishgroup.id }} </p>
-	<p> Name     : {{ wishgroup.name }} </p>
-	<p> Num of Member : {{ num_of_members }} </p>
-	<br/><hr>
+  <div class="container">
+    <div class="row">
+      <div class="column col-md-offset-1 col-md-10">
 
-	<h2>Wishes</h2>
-	<button onclick="make_wish()" id="my_button">MAKE WISH</button>
-	<div id="make_wish"></div><br/>
-	{% for wish in member_wishes %}
-	<p>Wisher : <font color="green">{{ wish.wisher.user.username }}</font> </p>
-	<p>Implementer : <font color="green">{{ wish.implementer.user.username }}</font> </p>
-	<p>Body : <font color="green">{{ wish.body }}</font> </p>
-	<br/>
-	{% endfor %}
-	<br/><hr>
+        <div class="panel panel-default">
+          <div class="panel-heading">Group Information</div>
+          <div class="panel-body">
+            <p class="lead"> ID       : {{ wishgroup.id }} </p>
+            <p class="lead"> Name     : {{ wishgroup.name }} </p>
+            <p class="lead"> Num of Member : {{ num_of_members }} </p>
+          </div>
+        </div>
 
-	<h2>Tasks</h2>
-	{% for task in member_tasks %}
-	<p>Wisher : <font color="green">{{ task.wisher.user.username }}</font> </p>
-	<p>Implementer : <font color="green">{{ task.implementer.user.username }}</font> </p>
-	<p>Body : <font color="green">{{ task.body }}</font> </p>
-	<br/>
-	{% endfor %}
-	<br/><hr>
+        <div class="contain well"><div class="row"><div class="column col-sm-offset-1 col-sm-7">
+          <h1>Group Information</h1>
+          <p class="lead"> ID       : {{ wishgroup.id }} </p>
+          <p class="lead"> Name     : {{ wishgroup.name }} </p>
+          <p class="lead"> Num of Member : {{ num_of_members }} </p>
+        </div></div></div>
 
-	<p><a href="/group_list"> &lt- back to groups list</a></p>
-	<hr><br/>
+        <br/><hr>
 
-	<h3> List of Members : </h3>
-	{% for member in wishgroup_members %}
-		<p>{{ member.inner_id }} | {{ member.user.username }}</p>
-	{% endfor %}
+        <h2>Wishes</h2>
+        <button onclick="make_wish()" id="my_button" class="btn btn-success">MAKE WISH</button>
+        <div id="make_wish"></div><br/>
+        {% for wish in member_wishes %}
+        <p class="lead">Wisher : <font color="green">{{ wish.wisher.user.username }}</font> </p>
+        <p class="lead">Implementer : <font color="green">{{ wish.implementer.user.username }}</font> </p>
+        <p class="lead">Body : <font color="green">{{ wish.body }}</font> </p>
+        <br/>
+        {% endfor %}
+        <br/><hr>
+
+        <h2>Tasks</h2>
+        {% for task in member_tasks %}
+        <p class="lead">Wisher : <font color="green">{{ task.wisher.user.username }}</font> </p>
+        <p class="lead">Implementer : <font color="green">{{ task.implementer.user.username }}</font> </p>
+        <p class="lead">Body : <font color="green">{{ task.body }}</font> </p>
+        <br/>
+        {% endfor %}
+
+        <br/><hr>
+        
+        <button class="btn btn-block" onclick="location='/group_list'">
+          <strong><span class="glyphicon glyphicon-chevron-left"></span> Back to groups list</strong>
+        </button>
+
+        <hr><br/>
+
+
+        <h2> List of Members : </h2>
+        <table class="table table-striped">
+          <thead>
+            <th>No</th>
+            <th>User Name</th>
+          </thead>
+          <tbody>
+            {% for member in wishgroup_members %}
+            <tr>
+              <td>{{ member.inner_id }}</td>
+              <td>{{ member.user.username }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
 {% endblock %}
