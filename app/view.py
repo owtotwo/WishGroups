@@ -136,5 +136,5 @@ def make_wish():
 		pass
 	return render_template("make_wish.html",\
 		current_user = login.current_user,\
-		has_made_wish = lambda x:x)
+		has_made_wish = lambda x: x)
 
