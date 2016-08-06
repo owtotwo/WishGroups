@@ -97,24 +97,17 @@ def distribute_wish(wishgroup_id):
 	wg = find_wishgroup_by_id(wishgroup_id)
 	wishes_id = [x.id for x in wg.wishes]
 	if len(wishes_id) < 2:
-		return False
+		return 0
 	shuffle(wishes_id)
 	for i in range(len(wishes_id) - 1):
 		find_wish_by_id(wishes_id[i]).implementer_id = find_wish_by_id(wishes_id[i + 1]).wisher_id
 	find_wish_by_id(wishes_id[-1]).implementer_id = find_wish_by_id(wishes_id[0]).wisher_id
 	db.session.commit()
-	return True
+	return len(wishes_id)
 
 
 def distribute_all_wish():
-	'''
 	for i in all_wishgroups():
-		print(i.id)
-	
-	print("Distributing WishGroup " + str(i) + "...", end="")
-	if not distribute_wish(i):
-		return False
-	print("Done!")
-	'''
-	print("Hey")
-	return True
+		print("Distributing WishGroup " + str(i.id) + "...", end="")
+		print(str(distribute_wish(i.id)) + " Wishes...", end="")
+		print("Done!")
