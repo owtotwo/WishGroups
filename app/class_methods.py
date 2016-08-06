@@ -104,3 +104,17 @@ def distribute_wish(wishgroup_id):
 	find_wish_by_id(wishes_id[-1]).implementer_id = find_wish_by_id(wishes_id[0]).wisher_id
 	db.session.commit()
 	return True
+
+
+def distribute_all_wish():
+	'''
+	for i in all_wishgroups():
+		print(i.id)
+	
+	print("Distributing WishGroup " + str(i) + "...", end="")
+	if not distribute_wish(i):
+		return False
+	print("Done!")
+	'''
+	print("Hey")
+	return True

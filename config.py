@@ -10,3 +10,7 @@ SECRET_KEY = 'mstc wish groups'
 
 # init value of classes
 NUM_OF_MEMBER_INIT_STARS = 5
+
+DISTRIBUTE_HOUR = 21
+DISTRIBUTE_MIN = 24
+DISTRIBUTE_SEC = 00
