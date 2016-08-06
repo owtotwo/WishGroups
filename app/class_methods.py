@@ -43,8 +43,7 @@ def get_member_by_user_and_wishgroup(user_id, wishgroup_id):
 
 def has_made_wish(member_id):
 	mem = find_member_by_id(member_id)
-	# TODO()
-	return False
+	return len(mem.wishes.all()) > 0
 
 # ========================== User ================================
 
@@ -87,3 +86,21 @@ def add_wishgroup(user_id, wishgroup_name):
 def get_members_from_wishgroup_by_id(wishgroup_id):
 	result = Member.query.filter(Member.wishgroup_id == wishgroup_id).all()
 	return sorted(result, key = (lambda x: x.inner_id))
+
+
+# ======================== Unknown =============================
+from random import shuffle
+
+def distribute_wish(wishgroup_id):
+	# for each member as well as wisher in wishgroup, shuffle their id 
+	# and map them to others.
+	wg = find_wishgroup_by_id(wishgroup_id)
+	wishes_id = [x.id for x in wg.wishes]
+	if len(wishes_id) < 2:
+		return False
+	shuffle(wishes_id)
+	for i in range(len(wishes_id) - 1):
+		find_wish_by_id(wishes_id[i]).implementer_id = find_wish_by_id(wishes_id[i + 1]).wisher_id
+	find_wish_by_id(wishes_id[-1]).implementer_id = find_wish_by_id(wishes_id[0]).wisher_id
+	db.session.commit()
+	return True

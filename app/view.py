@@ -86,10 +86,7 @@ def join_group():
 			return redirect(url_for('group_info', wishgroup_id = wishgroup_id))
 		else:
 			flash('You have been in this group!')
-	return render_template('join_group.html',\
-		current_user = login.current_user,\
-		all_wishgroups = all_wishgroups,\
-		user_wishgroups = [i.wishgroup for i in login.current_user.members])
+	return redirect(url_for('group_list'))
 
 
 @app.route('/group_list')
@@ -126,15 +123,4 @@ def group_info(wishgroup_id):
 		wishgroup_members = wishgroup_members,\
 		member_wishes = mem.wishes,\
 		member_tasks = mem.tasks)
-
-
-@app.route('/make_wish')
-@login.login_required
-def make_wish():
-	#mem = get_member_by_user_and_wishgroup(login.current_user.id, wishgroup_id)
-	if request.method == "POST":
-		pass
-	return render_template("make_wish.html",\
-		current_user = login.current_user,\
-		has_made_wish = lambda x: x)
 
