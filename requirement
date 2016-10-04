@@ -1,8 +1,7 @@
 # for virtualenv pip3 install -r requirement
-# python3.5
+# python3.5+
 
 Flask==0.11.1
-flask-login
 Flask-Login==0.3.2
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
