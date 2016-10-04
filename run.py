@@ -7,4 +7,4 @@ distribution_thread.start()
 
 # if use_reloader is True, it will restart the app and make some wrong
 # in the threads, which will cause the distribution_thread runs twice.
-app.run(host="192.168.1.105", port=8080, debug=True, use_reloader=False)
+app.run(host="127.0.0.1", port=5000, debug=True, use_reloader=False)
